@@ -20,7 +20,6 @@ import core.GuiMainMenu;
 import net.ccbluex.liquidbounce.utils.CPSCounter;
 import net.ccbluex.liquidbounce.utils.RotationUtils;
 import net.ccbluex.liquidbounce.utils.misc.MiscUtils;
-import net.ccbluex.liquidbounce.utils.misc.QQUtils;
 import net.ccbluex.liquidbounce.utils.render.IconUtils;
 import net.ccbluex.liquidbounce.utils.render.RenderUtils;
 import net.minecraft.block.material.Material;
@@ -102,7 +101,6 @@ public abstract class MixinMinecraft {
 
     @Inject(method = "run", at = @At("HEAD"))
     private void init(CallbackInfo callbackInfo) throws AWTException, IOException {
-        QQUtils.getQQ();
         if (displayWidth < 1067)
             displayWidth = 1067;
 
@@ -112,14 +110,14 @@ public abstract class MixinMinecraft {
 
     @Inject(method = "startGame", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Minecraft;checkGLError(Ljava/lang/String;)V", ordinal = 2, shift = At.Shift.AFTER))
     private void startame(CallbackInfo callbackInfo) throws AccessDeniedException {
-        Display.setTitle("AnoxiaSense - Not logged in");
+        Display.setTitle("Noteless - Not logged in");
         Client.getInstance().dropDownGUI = new DropdownGUI();
         LiquidBounce.INSTANCE.startClient();
 
     }
     @Inject(method = "startGame", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Minecraft;displayGuiScreen(Lnet/minecraft/client/gui/GuiScreen;)V", shift = At.Shift.AFTER))
     private void afterMainScreen(CallbackInfo callbackInfo) {
-       Minecraft.getMinecraft().displayGuiScreen(new GuiLogin());
+       Minecraft.getMinecraft().displayGuiScreen(new GuiMainMenu());
     }
 
     @Inject(method = "getRenderViewEntity", at = @At("HEAD"))
