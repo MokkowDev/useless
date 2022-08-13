@@ -1,8 +1,5 @@
 package core.Verify;
 
-
-
-
 import antiskidderobfuscator.NativeMethod;
 import cn.WbxMain;
 import com.google.gson.JsonObject;
@@ -402,7 +399,7 @@ public class GuiLogin extends GuiScreen {
     private void verify() throws Exception{
         Class.forName("core.Verify.GuiLogin").getField("verifyType").set(this,false);
         try {
-            final String string = get("https://neteaseapi-alpha.vercel.app/sus);
+            final String string = get("https://neteaseapi-alpha.vercel.app/sus");
             JSONObject jsonObject = new JSONObject(string);
             status = "Success";
             //System.out.println(string);
