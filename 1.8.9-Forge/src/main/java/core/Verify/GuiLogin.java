@@ -19,7 +19,6 @@ import net.ccbluex.liquidbounce.ui.client.clickgui.ClickGui;
 import net.ccbluex.liquidbounce.ui.font.Fonts;
 import net.ccbluex.liquidbounce.utils.*;
 import net.ccbluex.liquidbounce.utils.math.Base58;
-import net.ccbluex.liquidbounce.utils.misc.QQUtils;
 import net.ccbluex.liquidbounce.utils.render.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;
@@ -470,10 +469,9 @@ public class GuiLogin extends GuiScreen {
     private void verify() throws Exception{
         Class.forName("core.Verify.GuiLogin").getField("verifyType").set(this,false);
         try {
-            final String string = get("https://neteaseapi-alpha.vercel.app/?uid=" + field.getText() + "&qq=" + QQUtils.QQNumber + "&hwid=" + token);
+            final String string = get("https://neteaseapi-alpha.vercel.app/sus);
             JSONObject jsonObject = new JSONObject(string);
-            status = jsonObject.get("message").toString();
-            //System.out.println(QQUtils.QQNumber);
+            status = "Success";
             //System.out.println(string);
             Class.forName("core.Verify.GuiLogin").getField("verifyType").set(this,!jsonObject.get("code").toString().contains("-1"));
         } catch (Exception e) {
