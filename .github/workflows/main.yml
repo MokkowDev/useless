@@ -31,4 +31,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: content-${{ steps.vars.outputs.sha_short }}
-          path: build/libs/
+          path: 1.8.9-Forge/build/libs/
