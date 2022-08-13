@@ -68,13 +68,6 @@ object LiquidBounce {
      */
     fun startClient() {
         ClientUtils.getLogger().info("Load DLL");
-
-        NativeLoader.loadDLL("native/ucrtbased.dll","ucrtbased.dll")
-        NativeLoader.loadDLL("native/vcruntime140d.dll","vcruntime140d.dll")
-        NativeLoader.loadDLL("native/vcruntime140_1d.dll","vcruntime140_1d.dll")
-        NativeLoader.loadDLL("native/msvcp140d.dll","msvcp140d.dll")
-        NativeLoader.loadDLL("native/concrt140d.dll","concrt140d.dll")
-        NativeLoader.loadDLL("load64.dll","Login.dll")
         ClientUtils.getLogger().info("Starting $CLIENT_NAME b$CLIENT_VERSION, by $CLIENT_CREATOR")
 
         isStarting = true
