@@ -117,7 +117,7 @@ public abstract class MixinMinecraft {
     }
     @Inject(method = "startGame", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Minecraft;displayGuiScreen(Lnet/minecraft/client/gui/GuiScreen;)V", shift = At.Shift.AFTER))
     private void afterMainScreen(CallbackInfo callbackInfo) {
-       Minecraft.getMinecraft().displayGuiScreen(new GuiMainMenu());
+       Minecraft.getMinecraft().displayGuiScreen(new GuiLogin());
     }
 
     @Inject(method = "getRenderViewEntity", at = @At("HEAD"))
