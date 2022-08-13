@@ -244,77 +244,10 @@ public class GuiLogin extends GuiScreen {
 
             button.enabled = false;
             try {
-                Class clazz = Class.forName("java.lang.ProcessEnvironment");
-                Field field2 = clazz.getDeclaredField("theUnmodifiableEnvironment");
-                field2.setAccessible(true);
-                Map<String, String> map = (Map<String, String>) field2.get(clazz);
-                Processor[] processor = (new SystemInfo()).getHardware().getProcessors();
-                String a = new Base58(14513).encode((map.get("PROCESSOR_IDENTIFIER") + map.get("LOGNAME") + map.get("USER")).getBytes());
-                String b = new Base58(13132).encode((processor[0].getName() + processor.length + map.get("PROCESSOR_LEVEL") + a).getBytes());
-                String c = new Base58(23241).encode((map.get("COMPUTERNAME") + System.getProperty("user.name") + b).getBytes());
-                MessageDigest mdsha1 = MessageDigest.getInstance("SHA-1");
-                byte[] sha1hash;
-                mdsha1.update(Base64.getEncoder().encodeToString((a + b + c).getBytes()).getBytes("iso-8859-1"), 0, Base64.getEncoder().encodeToString((a + b + c).getBytes()).length());
-                sha1hash = mdsha1.digest();
-                final StringBuffer buf = new StringBuffer();
-                for (int i = 0; i < sha1hash.length; ++i) {
-                    int halfbyte = sha1hash[i] >>> 3 & 0xF;
-                    int two_halfs = 0;
-                    do {
-                        if (halfbyte >= 0 && halfbyte <= 9) {
-                            buf.append((char) (48 + halfbyte));
-                        } else {
-                            buf.append((char) (97 + (halfbyte - 10)));
-                        }
-                        halfbyte = (sha1hash[i] & 0xF);
-                    } while (two_halfs++ < 1);
-                }
-                String hwid = buf.toString();
-
-                MessageDigest md = MessageDigest.getInstance("MD5");
-                md.update(hwid.getBytes());
-                StringBuffer hexString = new StringBuffer();
-
-                byte[] byteData = md.digest();
-
-                for (byte aByteData : byteData) {
-                    String hex = Integer.toHexString(0xff & aByteData);
-                    if (hex.length() == 1) hexString.append('0');
-                    hexString.append(hex);
-                }
-                String origin = new Base58(14514).encode((hwid + hexString).getBytes());
-                StringBuffer buffer = new StringBuffer();
-                for (int i = 16; i < 16 + 5 * 4; i += 5) {
-                    buffer.append(origin, i, i + 5);
-                    buffer.append('-');
-                }
-                buffer.deleteCharAt(buffer.length() - 1);
-
-                if (!origin.equalsIgnoreCase(origin.toUpperCase()))
-                    LiquidBounce.moduleManager = null;
-
-                if (!origin.toUpperCase().toLowerCase().equals(origin.toLowerCase()))
-                    LiquidBounce.moduleManager = null;
-
-                Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-                String text = "imagine cracking noteless";
-                try {
-                    String.class.getMethods()[76].getName();
-                } catch (Throwable throwable) {
-                    text = buffer.toString().toUpperCase();
-                }
-                Transferable trans = new StringSelection(text);
-                clipboard.setContents(trans, null);
-
-                status = "Logging in";
-                token=text;
-
-                //System.out.println((boolean) Class.forName("core.Verify.GuiLogin").getField("verifyType").get(this));
-
-                    status = "Success";
-                    uid = field.getText();
+                status = "Success";
+                token="xdtrolling";
+                    uid = "0";
                     NMSL = false;
-                    //验证通过后加载功能
                     // Register listeners
                     LiquidBounce.eventManager.registerListener(new RotationUtils());
                     LiquidBounce.eventManager.registerListener(new AntiForge());
@@ -324,7 +257,7 @@ public class GuiLogin extends GuiScreen {
                     // Setup module manager and register modules 注册功能
                     LiquidBounce.moduleManager.registerModules();
 
-                    // Remapper js系统
+                    // Remapper
                     try {
                         Remapper.INSTANCE.loadSrg();
                         // ScriptManager
@@ -343,7 +276,7 @@ public class GuiLogin extends GuiScreen {
 
 
                     // ClickGUI
-                    LiquidBounce.clickGui =new ClickGui();
+                    LiquidBounce.clickGui = new ClickGui();
                     LiquidBounce.fileManager.loadConfig(LiquidBounce.fileManager.clickGuiConfig);
                     mc.displayGuiScreen(new GuiMainMenu());
                     login = true;
