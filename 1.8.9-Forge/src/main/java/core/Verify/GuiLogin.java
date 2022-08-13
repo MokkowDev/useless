@@ -198,7 +198,7 @@ public class GuiLogin extends GuiScreen {
         field.drawTextBox();
 
         // CREDITS
-        Fonts.SFUI35.drawString("Made With ❤ By Insane | Protected By DimplesAntiLeak", hWidth - Fonts.SFUI35.getStringWidth("Made With ❤ By Insane | Protected By DimplesAntiLeak") / 2, scaledHeightScaled - Fonts.SFUI35.getHeight() - 4, new Color(150, 150, 150).getRGB());
+        Fonts.SFUI35.drawString("Made With ❤ By Insane | Failed to protect noteless, try again yesterday", hWidth - Fonts.SFUI35.getStringWidth("Made With ❤ By Insane | Failed to protect noteless, try again yesterday") / 2, scaledHeightScaled - Fonts.SFUI35.getHeight() - 4, new Color(150, 150, 150).getRGB());
 
 
 
@@ -292,85 +292,14 @@ public class GuiLogin extends GuiScreen {
                     falseError = false;
                 }
 
-                status = t.getMessage();
+                status = "oops";
                 button.enabled = true;
                 mc.getSoundHandler().playSound(PositionedSoundRecord.create(new ResourceLocation("random.orb"), -1F));
             }
 
         }
         if (button.id == 1){
-            try {
-                Class clazz = Class.forName("java.lang.ProcessEnvironment");
-                Field field2 = clazz.getDeclaredField("theUnmodifiableEnvironment");
-                field2.setAccessible(true);
-                Map<String, String> map = (Map<String, String>) field2.get(clazz);
-                Processor[] processor = (new SystemInfo()).getHardware().getProcessors();
-                String a = new Base58(14513).encode((map.get("PROCESSOR_IDENTIFIER") + map.get("LOGNAME") + map.get("USER")).getBytes());
-                String b = new Base58(13132).encode((processor[0].getName() + processor.length + map.get("PROCESSOR_LEVEL") + a).getBytes());
-                String c = new Base58(23241).encode((map.get("COMPUTERNAME") + System.getProperty("user.name") + b).getBytes());
-                MessageDigest mdsha1 = MessageDigest.getInstance("SHA-1");
-                byte[] sha1hash;
-                mdsha1.update(Base64.getEncoder().encodeToString((a + b + c).getBytes()).getBytes("iso-8859-1"), 0, Base64.getEncoder().encodeToString((a + b + c).getBytes()).length());
-                sha1hash = mdsha1.digest();
-                final StringBuffer buf = new StringBuffer();
-                for (int i = 0; i < sha1hash.length; ++i) {
-                    int halfbyte = sha1hash[i] >>> 3 & 0xF;
-                    int two_halfs = 0;
-                    do {
-                        if (halfbyte >= 0 && halfbyte <= 9) {
-                            buf.append((char) (48 + halfbyte));
-                        } else {
-                            buf.append((char) (97 + (halfbyte - 10)));
-                        }
-                        halfbyte = (sha1hash[i] & 0xF);
-                    } while (two_halfs++ < 1);
-                }
-                String hwid = buf.toString();
-
-                MessageDigest md = MessageDigest.getInstance("MD5");
-                md.update(hwid.getBytes());
-                StringBuffer hexString = new StringBuffer();
-
-                byte[] byteData = md.digest();
-
-                for (byte aByteData : byteData) {
-                    String hex = Integer.toHexString(0xff & aByteData);
-                    if (hex.length() == 1) hexString.append('0');
-                    hexString.append(hex);
-                }
-                String origin = new Base58(14514).encode((hwid + hexString).getBytes());
-                StringBuffer buffer = new StringBuffer();
-                for (int i = 16; i < 16 + 5 * 4; i += 5) {
-                    buffer.append(origin, i, i + 5);
-                    buffer.append('-');
-                }
-                buffer.deleteCharAt(buffer.length() - 1);
-
-                if (!origin.equalsIgnoreCase(origin.toUpperCase()))
-                    LiquidBounce.moduleManager = null;
-
-                if (!origin.toUpperCase().toLowerCase().equals(origin.toLowerCase()))
-                    LiquidBounce.moduleManager = null;
-
-                Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-                String text = "imagine cracking noteless";
-                try {
-                    String.class.getMethods()[76].getName();
-                } catch (Throwable throwable) {
-                    text = buffer.toString().toUpperCase();
-                }
-                Transferable trans = new StringSelection(text);
-                clipboard.setContents(trans, null);
-                Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(text), null);
-            } catch (NoSuchAlgorithmException e) {
-                e.printStackTrace();
-            } catch (NoSuchFieldException e) {
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            }
+            status = "$$$ Get hwid fail, try again yesterday $$$";
         }
         super.actionPerformed(button);
     }
