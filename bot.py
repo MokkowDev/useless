@@ -96,11 +96,14 @@ def admin(ctx):
         
 @bot.command()
 @commands.check(admin)
-async def announce(ctx, message=None):
+async def announce(ctx, *, text):
 	try:
+		message = ctx.mesaage
+		await message.delete()
+		
 		embed = discord.Embed(
 		   color=discord.Color.from_rgb(0, 255, 0),
-		   description=f"{message}",
+		   description=f"{text}",
 		 ).set_author(name=f"Announcements")
 		await send(embed=embed)
 		await ctx.send(f"Announcement has been sent to server that is subscribed.")
