@@ -125,6 +125,7 @@ async def checkloop():
                 color=discord.Color.from_rgb(247, 57, 24),
                 description=f"<t:{math.floor(time.time())}:R>",
             ).set_author(name=f"Watchdog banned {wban_dif} player{'s' if wban_dif > 1 else ''}!")
+            await bot.change_presence(activity=discord.Game(name=f"Watchdog: {wban_dif} player{'s' if wban_dif > 1 else ''}!"))
             await send(embed=embed)
 
         if sban_dif > 0:
@@ -132,6 +133,7 @@ async def checkloop():
                 color=discord.Color.from_rgb(247, 229, 24),
                 description=f"<t:{math.floor(time.time())}:R>",
             ).set_author(name=f"Staff banned {sban_dif} player{'s' if sban_dif > 1 else ''}!")
+            await bot.change_presence(activity=discord.Game(name=f"Staff: {sban_dif} player{'s' if sban_dif > 1 else ''}!"))
             await send(embed=embed)
 
     owd_bans = wd_bans
