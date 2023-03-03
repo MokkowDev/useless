@@ -91,21 +91,22 @@ async def unsubscribe(ctx, channel: int):
         await ctx.send(f"Usage: `+unsubscribe <channel id>`")
         print(e)
         
- @bot.command()
- async def announcement(ctx, message: string):
-    try:  	
-        if ctx.author.id not in (1056250364401299577, 1056250364401299577):
-        return
-
-        await ctx.send(f"Announcement has been sent to all server.")
-        embed = discord.Embed(
-                color=discord.Color.from_rgb(0, 255, 0),
-                description=f"{message}",
-            ).set_author(name=f"Announcements")
-            await send(embed=embed)
-    except Exception as e:
-        await ctx.send(f"Usage: `-announcement <message>`")
-        print(e)
+def admin(ctx):
+	return ctx.author.id in (1056250364401299577, 1056250364401299577)
+        
+@bot.command()
+@commands.check(admin)
+async def announce(ctx, message=None):
+	try:
+		embed = discord.Embed(
+		   color=discord.Color.from_rgb(0, 255, 0),
+		   description=f"{message}",
+		 ).set_author(name=f"Announcements")
+		await send(embed=embed)
+		await ctx.send(f"Announcement has been sent to server that is subscribed.")
+	except Exception as e:
+		await ctx.send(f"Usage: `-announce <message>`")
+		print(e)
 
 # The actual checker
 @tasks.loop(seconds=0.1)
